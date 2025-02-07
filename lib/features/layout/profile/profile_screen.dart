@@ -1,4 +1,6 @@
 import 'package:evently/core/app_assets/app_assets.dart';
+import 'package:evently/core/extensions/context_extension.dart';
+import 'package:evently/core/routes/app_routes_name.dart';
 import 'package:evently/core/theme/app_color.dart';
 import 'package:evently/features/Login/loginpage.dart';
 import 'package:flutter/material.dart';
@@ -173,9 +175,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   Spacer(),
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.popAndPushNamed(context, LoginPage.routeName);
-                    },
+                    onPressed: () => context.removeAllAndPush(PagesRouteName.LoginPage),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

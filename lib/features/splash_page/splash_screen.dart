@@ -1,7 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:evently/core/app_assets/app_assets.dart';
+import 'package:evently/core/routes/app_routes_name.dart';
 import 'package:evently/core/theme/app_color.dart';
-import 'package:evently/features/onborder/firstscreen.dart';
+import 'package:evently/main.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -23,7 +24,8 @@ class _SplashScreenState extends State<SplashScreen> {
         seconds: 2,
       ),
       () {
-        Navigator.pushNamed(context, FirstScreen.routeName);
+        navigatorKey.currentState!.pushNamedAndRemoveUntil(PagesRouteName.FirstScreen, (route) => false,
+        );
       },
     );
   }

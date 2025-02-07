@@ -1,4 +1,5 @@
 import 'package:evently/core/app_assets/app_assets.dart';
+import 'package:evently/core/extensions/context_extension.dart';
 import 'package:evently/core/theme/app_color.dart';
 import 'package:flutter/material.dart';
 
@@ -28,9 +29,7 @@ class ResetPassword extends StatelessWidget {
               horizontal: 16.0,
             ),
             child: ElevatedButton(
-              onPressed: () {
-                // Navigator.pushNamed(context, OnboardScreen.routeName,);
-              },
+              onPressed:() => context.back(),
               child: SizedBox(
                 width: 350,
                 child: Text(

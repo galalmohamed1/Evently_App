@@ -4,7 +4,6 @@ import 'package:evently/features/layout/page/widget/custom_tab_bar.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  static String routeName = "HomePage";
 
   const HomePage({super.key});
 

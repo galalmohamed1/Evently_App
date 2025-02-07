@@ -1,3 +1,5 @@
+import 'package:evently/core/extensions/context_extension.dart';
+import 'package:evently/core/routes/app_routes_name.dart';
 import 'package:evently/core/theme/app_color.dart';
 import 'package:evently/features/Login/loginpage.dart';
 import 'package:evently/features/onborder/fourscreen.dart';
@@ -93,8 +95,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                     child: IconButton(
                         onPressed: () {
                           index == 2
-                              ? Navigator.pushNamed(
-                                  context, LoginPage.routeName)
+                              ? context.goToNamed(PagesRouteName.LoginPage)
                               : _controller.animateToPage(index + 1,
                                   duration: Duration(milliseconds: 250),
                                   curve: Curves.linear);

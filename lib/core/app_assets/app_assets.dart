@@ -20,7 +20,6 @@ class AppAssets {
   static String icon_user = "assets/icons/User_01.png";
   static String icon_home2 = "assets/icons/Home 2.png";
   static String icon_heart2 = "assets/icons/Heart2.png";
-  static String icon_map2 = "assets/icons/map2.png";
   static String icon_user2 = "assets/icons/User_2.png";
   static String image_Reset_Password = "assets/images/Reset_Password.png";
   static String image_profile = "assets/images/route.png";

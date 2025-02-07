@@ -1,15 +1,19 @@
-import 'package:evently/features/Login/loginpage.dart';
-import 'package:evently/features/Login/reset_password.dart';
-import 'package:evently/features/Login/signup.dart';
-import 'package:evently/features/add_cart/add_cart.dart';
-import 'package:evently/features/layout/page/pagescreen.dart';
-import 'package:evently/features/onborder/firstscreen.dart';
-import 'package:evently/features/onborder/onboard_screen.dart';
-import 'package:evently/features/splash_page/splash_screen.dart';
+import 'package:bot_toast/bot_toast.dart';
+import 'package:evently/core/services/loading_service.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'core/routes/app_routes.dart';
+import 'firebase_options.dart';
 
-void main() {
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
+  configLoading();
 }
 
 class MyApp extends StatelessWidget {
@@ -21,17 +25,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Evently',
-      initialRoute: SplashScreen.routeName,
-      routes: {
-        SplashScreen.routeName: (_) => SplashScreen(),
-        OnboardScreen.routeName: (_) => OnboardScreen(),
-        FirstScreen.routeName: (_) => FirstScreen(),
-        LoginPage.routeName: (_) => LoginPage(),
-        SignUp.routeName: (_) => SignUp(),
-        ResetPassword.routeName: (_) => ResetPassword(),
-        PageScreen.routeName: (_) => PageScreen(),
-        Add_Card.routeName: (_) => Add_Card(),
-      },
+        onGenerateRoute: AppRoutes.onGeneratedRoute,
+        navigatorKey: navigatorKey,
+        builder: EasyLoading.init(
+        builder: BotToastInit(),
+        ),
     );
   }
 }

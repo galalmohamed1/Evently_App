@@ -1,11 +1,12 @@
 import 'package:evently/core/app_assets/app_assets.dart';
+import 'package:evently/core/routes/app_routes_name.dart';
 import 'package:evently/core/theme/app_color.dart';
 import 'package:evently/features/onborder/onboard_screen.dart';
+import 'package:evently/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
 class FirstScreen extends StatefulWidget {
-  static String routeName = "FirstScreen";
 
   const FirstScreen({super.key});
 
@@ -159,10 +160,7 @@ class _FirstScreenState extends State<FirstScreen> {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  OnboardScreen.routeName,
-                );
+                navigatorKey.currentState!.pushNamed(PagesRouteName.OnboardScreen);
               },
               child: SizedBox(
                 width: 350,

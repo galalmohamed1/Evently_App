@@ -1,4 +1,6 @@
 import 'package:evently/core/app_assets/app_assets.dart';
+import 'package:evently/core/extensions/context_extension.dart';
+import 'package:evently/core/routes/app_routes_name.dart';
 import 'package:evently/core/theme/app_color.dart';
 import 'package:evently/features/add_cart/add_cart.dart';
 import 'package:evently/features/layout/home_page/home_page.dart';
@@ -6,10 +8,10 @@ import 'package:evently/features/layout/love/love_screen.dart';
 import 'package:evently/features/layout/map/map_screen.dart';
 import 'package:evently/features/layout/page/widget/custom_nav_bar_item.dart';
 import 'package:evently/features/layout/profile/profile_screen.dart';
+import 'package:evently/main.dart';
 import 'package:flutter/material.dart';
 
 class PageScreen extends StatefulWidget {
-  static String routeName = "PageScreen";
 
   PageScreen({super.key});
 
@@ -41,9 +43,7 @@ class _PageScreenState extends State<PageScreen> {
           ),
         ),
         backgroundColor: AppColor.purpel,
-        onPressed: () {
-          Navigator.pushNamed(context, Add_Card.routeName);
-        },
+        onPressed: () => navigatorKey.currentState!.pushNamed(PagesRouteName.Add_Card),
         child: Icon(
           Icons.add,
           size: 30,
