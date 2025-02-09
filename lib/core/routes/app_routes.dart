@@ -75,7 +75,7 @@ abstract class AppRoutes {
       case PagesRouteName.Add_Card:
         {
           return MaterialPageRoute(
-            builder: (context) => const  Add_Card(),
+            builder: (context) =>   Add_Card(),
             settings: settings,
           );
 

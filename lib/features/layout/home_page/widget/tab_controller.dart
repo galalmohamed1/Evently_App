@@ -13,7 +13,6 @@ class TabWidgetController extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
       child: Container(
-        // width: 90,
         height: 40,
         alignment: Alignment.center,
 
