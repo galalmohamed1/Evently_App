@@ -17,14 +17,13 @@ class FirebaseFunctions{
       return Future.value(true);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-
         SnackBarService.showErrorMessage(
             e.message ?? 'The password provided is too weak.');
         return Future.value(false);
       } else if (e.code == 'email-already-in-use') {
         // print('The account already exists for that email.');
         SnackBarService.showErrorMessage(
-            e.message ?? 'The password provided is too weak.');
+            e.message ?? 'The email provided is too weak.');
         return Future.value(false);
       }
       return Future.value(false);
@@ -48,10 +47,8 @@ class FirebaseFunctions{
       return Future.value(true);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        // print(e.message);
-        // print('The password provided is too weak.');
         SnackBarService.showErrorMessage(
-            e.message ?? 'The password provided is too weak.');
+            e.message ?? 'The user provided is too weak.');
         return Future.value(false);
       } else if (e.code == 'wrong-password') {
         // print('The account already exists for that email.');

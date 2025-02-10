@@ -1,10 +1,13 @@
 import 'package:evently/core/app_assets/app_assets.dart';
 import 'package:evently/core/theme/app_color.dart';
+import 'package:evently/models/event_data_models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Cart_Of_List extends StatelessWidget {
-  const Cart_Of_List({super.key});
+  final EventDataModel eventDataModel;
+  const Cart_Of_List({super.key, required this.eventDataModel});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,7 @@ class Cart_Of_List extends StatelessWidget {
       height: 200,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(AppAssets.image_sport),
+          image: AssetImage(eventDataModel.eventImage),
           fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.circular(16),
@@ -32,7 +35,7 @@ class Cart_Of_List extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: Text(
-              "21 Nov",
+              DateFormat("dd MMM").format(eventDataModel.eventDate),
               style: TextStyle(
                 color: AppColor.purpel,
                 fontSize: 15,
@@ -55,7 +58,7 @@ class Cart_Of_List extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "Meeting for Updating The Development Method",
+                    eventDataModel.eventTitle,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -66,7 +69,8 @@ class Cart_Of_List extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                ImageIcon(AssetImage(AppAssets.icon_heart))
+                ImageIcon(
+                    AssetImage(AppAssets.icon_heart))
               ],
             ),
           ),

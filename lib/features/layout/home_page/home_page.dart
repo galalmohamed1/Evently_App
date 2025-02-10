@@ -1,7 +1,10 @@
 import 'package:evently/core/app_assets/app_assets.dart';
+import 'package:evently/core/services/firebase_firestore_service.dart';
 import 'package:evently/core/theme/app_color.dart';
 import 'package:evently/features/layout/home_page/widget/home_tab_widget.dart';
+import 'package:evently/features/layout/love/widget/cart_list.dart';
 import 'package:evently/models/event_category.dart';
+import 'package:evently/models/event_data_models.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -54,9 +57,9 @@ class _HomePageState extends State<HomePage> {
         eventCategoryImg: "assets/images/category/Eating.png",
     ),
     EventCategory(
-        eventCategoryName: "Work Shop",
-        eventCategoryIcon: Icons.work_outlined,
-        eventCategoryImg: "assets/images/category/Eating.png",
+      eventCategoryName: "Work Shop",
+      eventCategoryIcon: Icons.work_outlined,
+      eventCategoryImg: "assets/images/category/Work Shop.png",
     ),
     EventCategory(
         eventCategoryName: "Exhibition",
@@ -195,33 +198,69 @@ class _HomePageState extends State<HomePage> {
                           ).toList()),
                     ),
                   ),
-                  // TabBar(
-                  //     isScrollable: true,
-                  //     tabAlignment: TabAlignment.start,
-                  //     indicatorColor: Colors.transparent,
-                  //     dividerColor: Colors.transparent,
-                  //     unselectedLabelColor: Colors.transparent,
-                  //     labelPadding: EdgeInsets.symmetric(horizontal: 5),
-                  //     onTap: (value) {
-                  //       current==value;
-                  //     },
-                  //     tabs: [
-                  //
-                  //       CustomTabBarAdd(
-                  //           text: "Work Shop",
-                  //           text_icon: AppAssets.icon_book,
-                  //           isSelected: false,
-                  //       ),
-                  //       CustomTabBarAdd(
-                  //           text: "Exhibition",
-                  //           text_icon: AppAssets.icon_book,
-                  //           isSelected: false,
-                  //       ),
-                  //     ]),
+
                 ],
               ),
             ),
           ),
+          SizedBox(height: 10,),
+          StreamBuilder(
+            stream: FirebaseFireStoreService.getStreamData(
+              eventCategories[selectedTap].eventCategoryName,
+            ),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Column(
+                  children: [
+                    const Text(
+                      "Something went wrong",
+                    ),
+                    const SizedBox(),
+                    IconButton(
+                      onPressed: () {},
+                      icon:  Icon(
+                        Icons.refresh_outlined,
+                        color: AppColor.purpel,
+                      ),
+                    )
+                  ],
+                );
+              }
+
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return  Center(
+                  child: CircularProgressIndicator(
+                    color: AppColor.purpel,
+                  ),
+                );
+              }
+
+              List<EventDataModel> eventDataList = snapshot.data!.docs.map(
+                    (element) {
+                  return element.data();
+                },
+              ).toList();
+
+              return eventDataList.isNotEmpty
+                  ? ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                itemBuilder: (context, index) => Cart_Of_List(
+                  eventDataModel: eventDataList[index],
+                ),
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 10,
+                ),
+                itemCount: eventDataList.length,
+              )
+                  : Text(
+                "No Event Created Yet..!",
+                // style: theme.textTheme.titleLarge,
+              );
+            },
+          ),
+
         ],
       ),
     );

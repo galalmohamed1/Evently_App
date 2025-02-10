@@ -2,6 +2,7 @@ import 'package:evently/core/app_assets/app_assets.dart';
 import 'package:evently/core/extensions/context_extension.dart';
 import 'package:evently/core/extensions/validations.dart';
 import 'package:evently/core/routes/app_routes_name.dart';
+import 'package:evently/core/services/snack_bar_service.dart';
 import 'package:evently/core/theme/app_color.dart';
 import 'package:evently/core/utlis/firebase-functions.dart';
 import 'package:evently/core/widget/custom_text_field.dart';
@@ -121,10 +122,17 @@ class _LoginPageState extends State<LoginPage> {
                         FirebaseFunctions.login(
                             emailAddress: _emailController.text,
                             password:_passwordController.text,
+
                         ).then((value) {
                           EasyLoading.dismiss();
-                          navigatorKey.currentState!.pushNamedAndRemoveUntil(PagesRouteName.PageScreen,(route) => false,);
-                            },);
+                          if(value==true){
+                            navigatorKey.currentState!.pushNamedAndRemoveUntil(
+                              PagesRouteName.PageScreen,
+                                  (route) => false,);
+                          }else{
+                            SnackBarService.showErrorMessage('The password provided is too weak.');
+                          }
+                          },);
                       }
 
                     },

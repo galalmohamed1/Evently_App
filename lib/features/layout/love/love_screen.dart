@@ -1,12 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:evently/core/services/firebase_firestore_service.dart';
 import 'package:evently/core/theme/app_color.dart';
 import 'package:evently/features/layout/love/widget/cart_list.dart';
+import 'package:evently/models/event_data_models.dart';
 import 'package:flutter/material.dart';
 
 class LoveScreen extends StatelessWidget {
+
   const LoveScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: AppColor.white,
       body: SafeArea(
@@ -45,17 +50,20 @@ class LoveScreen extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListView.separated(
-                  itemBuilder: (context, index) => Cart_Of_List(),
-                  separatorBuilder: (context, index) =>
-                      Padding(padding: EdgeInsets.symmetric(vertical: 8.0)),
-                  itemCount: 7,
-                ),
-              ),
-            ),
+            // StreamBuilder(stream: FirebaseFireStoreService.getDataFormFirestore()., builder: builder)
+            // Expanded(
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(8.0),
+            //     child: ListView.separated(
+            //       itemBuilder: (context, index) => Cart_Of_List(
+            //         eventDataModel: eventDataList[index],
+            //       ),
+            //       separatorBuilder: (context, index) =>
+            //           Padding(padding: EdgeInsets.symmetric(vertical: 8.0)),
+            //       itemCount: eventDataModel.length,
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

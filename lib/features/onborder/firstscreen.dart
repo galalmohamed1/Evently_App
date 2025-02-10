@@ -5,6 +5,7 @@ import 'package:evently/features/onborder/onboard_screen.dart';
 import 'package:evently/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FirstScreen extends StatefulWidget {
 
@@ -159,7 +160,10 @@ class _FirstScreenState extends State<FirstScreen> {
               height: 30,
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+                final prefs = await SharedPreferences.getInstance();
+                prefs.setBool("onboarding", true);
+                if (!mounted) return;
                 navigatorKey.currentState!.pushNamed(PagesRouteName.OnboardScreen);
               },
               child: SizedBox(

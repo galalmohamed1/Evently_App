@@ -4,6 +4,7 @@ import 'package:evently/core/routes/app_routes_name.dart';
 import 'package:evently/core/theme/app_color.dart';
 import 'package:evently/main.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   static final Duration _duration = Duration(milliseconds: 1750);
@@ -16,6 +17,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
   @override
   initState() {
     super.initState();
@@ -23,8 +25,10 @@ class _SplashScreenState extends State<SplashScreen> {
       Duration(
         seconds: 2,
       ),
-      () {
-        navigatorKey.currentState!.pushNamedAndRemoveUntil(PagesRouteName.FirstScreen, (route) => false,
+      () async{
+        final  prefs = await SharedPreferences.getInstance();
+        final onboarding=prefs.getBool("onboarding")??false;
+        navigatorKey.currentState!.pushReplacementNamed(onboarding?PagesRouteName.LoginPage:PagesRouteName.FirstScreen,
         );
       },
     );

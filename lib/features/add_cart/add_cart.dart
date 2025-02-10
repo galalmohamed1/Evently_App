@@ -28,15 +28,17 @@ class _Add_CardState extends State<Add_Card> {
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
   List<EventCategory> eventCategories = [
-    EventCategory(
-        eventCategoryName: "Sport",
-        eventCategoryIcon: Icons.directions_bike,
-        eventCategoryImg: "assets/images/category/Sport.png"),
 
     EventCategory(
-        eventCategoryName: "BirthDay",
-        eventCategoryIcon: Icons.cake_outlined,
-        eventCategoryImg: "assets/images/category/Birthday.png"),
+      eventCategoryName: "Sport",
+      eventCategoryIcon: Icons.directions_bike,
+      eventCategoryImg: "assets/images/category/Sport.png",
+    ),
+    EventCategory(
+      eventCategoryName: "BirthDay",
+      eventCategoryIcon: Icons.cake_outlined,
+      eventCategoryImg: "assets/images/category/Birthday.png",
+    ),
     EventCategory(
       eventCategoryName: "Book Club",
       eventCategoryIcon: Icons.menu_book_outlined,
@@ -50,6 +52,26 @@ class _Add_CardState extends State<Add_Card> {
         eventCategoryName: "Holiday",
         eventCategoryIcon: Icons.holiday_village_outlined,
         eventCategoryImg: "assets/images/category/Holiday.png"),
+    EventCategory(
+      eventCategoryName: "Gaming",
+      eventCategoryIcon: Icons.games_outlined,
+      eventCategoryImg: "assets/images/category/Gaming.png",
+    ),
+    EventCategory(
+      eventCategoryName: "Eating",
+      eventCategoryIcon: Icons.set_meal_outlined,
+      eventCategoryImg: "assets/images/category/Eating.png",
+    ),
+    EventCategory(
+      eventCategoryName: "Work Shop",
+      eventCategoryIcon: Icons.work_outlined,
+      eventCategoryImg: "assets/images/category/Work Shop.png",
+    ),
+    EventCategory(
+      eventCategoryName: "Exhibition",
+      eventCategoryIcon: Icons.water_drop_rounded,
+      eventCategoryImg: "assets/images/category/Exhibition.png",
+    ),
   ];
 
   @override
@@ -68,7 +90,7 @@ class _Add_CardState extends State<Add_Card> {
         ),
       ),
       body:  DefaultTabController(
-        length: 5,
+        length: 9,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Form(

@@ -30,13 +30,44 @@ abstract class FirebaseFireStoreService{
   }
 
   //[Function] to getDataFormFirestore
-  static getDataFormFirestore(){
+  static Future<List<EventDataModel>> getDataFormFirestore()async{
     var collectionRef=getCollectionReference();
+    QuerySnapshot<EventDataModel> data= await collectionRef.get();
+    List<EventDataModel> eventDataList= data.docs.map((element) {
+      return element.data();
+    },).toList();
+    return eventDataList ;
   }
 
   //[Function] to deleteEvent
-  static deleteEvent(){
+  Future<bool> deleteEvent(EventDataModel data){
+    try{
+      var collectionRef = getCollectionReference();
+      var docRef = collectionRef.doc(data.eventId);
+      docRef.delete();
+      return Future.value(true);
+    }catch (error){
+      return Future.value(false);
+    }
+  }
 
-    var collectionRef=getCollectionReference();
+  static Future<bool> updateEvent(EventDataModel data){
+    try{
+      var collectionRef = getCollectionReference();
+      var docRef = collectionRef.doc(data.eventId);
+      docRef.update(
+        data.toFirestore(),
+      );
+      return Future.value(true);
+    }catch (error){
+      return Future.value(false);
+    }
+  }
+  static Stream<QuerySnapshot<EventDataModel>> getStreamData(String categoryName) {
+    var collectionRef = getCollectionReference().where(
+      "eventCategory",
+      isEqualTo: categoryName,
+    );
+    return collectionRef.snapshots();
   }
 }

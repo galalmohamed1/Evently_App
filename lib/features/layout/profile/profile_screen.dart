@@ -3,6 +3,8 @@ import 'package:evently/core/extensions/context_extension.dart';
 import 'package:evently/core/routes/app_routes_name.dart';
 import 'package:evently/core/theme/app_color.dart';
 import 'package:evently/features/Login/loginpage.dart';
+import 'package:evently/main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -175,7 +177,11 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   Spacer(),
                   ElevatedButton(
-                    onPressed: () => context.removeAllAndPush(PagesRouteName.LoginPage),
+
+                    onPressed: () {
+                      FirebaseAuth.instance.signOut();
+                      navigatorKey.currentState!.pushNamedAndRemoveUntil(PagesRouteName.LoginPage, (route) => false,);
+                    },
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
